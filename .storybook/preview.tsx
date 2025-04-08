@@ -1,16 +1,68 @@
-import { controlsConfig } from './config/controls';
-import { decorators } from './config/decorators';
-import { viewportConfig } from './config/viewport';
+import React from 'react';
 
-import type { Preview } from '@storybook/react';
+import type { Decorator, Preview } from '@storybook/react';
+
+const withActions: Decorator = (Story, context) => {
+  return <Story {...context} />;
+};
+
+const withAccessibility: Decorator = (Story, context) => {
+  return <Story {...context} />;
+};
+
+const withInteraction: Decorator = (Story, context) => {
+  return <Story {...context} />;
+};
 
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: controlsConfig,
-    viewport: viewportConfig,
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    viewport: {
+      viewports: {
+        mobile: {
+          name: 'Mobile',
+          styles: {
+            width: '360px',
+            height: '640px',
+          },
+        },
+        tablet: {
+          name: 'Tablet',
+          styles: {
+            width: '768px',
+            height: '1024px',
+          },
+        },
+        desktop: {
+          name: 'Desktop',
+          styles: {
+            width: '1024px',
+            height: '768px',
+          },
+        },
+      },
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: true,
+          },
+        ],
+      },
+    },
+    interactions: {
+      disable: false,
+    },
   },
-  decorators,
+  decorators: [withActions, withAccessibility, withInteraction],
 };
 
 export default preview;
