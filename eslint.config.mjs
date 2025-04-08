@@ -119,6 +119,7 @@ const config = [
     languageOptions: {
       globals: {
         ...globals.jest,
+        context: 'readonly',
       },
     },
     plugins: {
