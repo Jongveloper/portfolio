@@ -22,6 +22,22 @@ const nextConfig = {
       },
     ],
   },
+  serverExternalPackages: [],
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        '@': './src',
+        '@shared': './src/shared',
+        '@app': './src/app',
+        '@pages': './src/pages',
+        '@widgets': './src/widgets',
+        '@features': './src/features',
+        '@entities': './src/entities',
+        '@styles': './src/styles',
+      }
+    },
+    optimizePackageImports: ['@emotion/react', '@emotion/styled']
+  },
   webpack: (config, { dev }) => {
     if (!dev) {
       config.optimization = {
