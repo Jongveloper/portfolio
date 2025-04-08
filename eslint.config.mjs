@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import eslintPluginImport from 'eslint-plugin-import';
+import jestPlugin from 'eslint-plugin-jest';
 import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js';
 import globals from 'globals';
 
@@ -31,6 +32,7 @@ const config = [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...globals.jest,
         __DEV__: 'readonly',
       },
     },
@@ -68,22 +70,12 @@ const config = [
               position: 'before',
             },
             {
-              pattern: 'react-native',
-              group: 'external',
+              pattern: '@app/**',
+              group: 'internal',
               position: 'before',
             },
             {
-              pattern: '@react-navigation/*',
-              group: 'external',
-              position: 'before',
-            },
-            {
-              pattern: '@tanstack/*',
-              group: 'external',
-              position: 'before',
-            },
-            {
-              pattern: '@screens/**',
+              pattern: '@pages/**',
               group: 'internal',
               position: 'before',
             },
@@ -120,6 +112,25 @@ const config = [
           maxBOF: 0,
         },
       ],
+    },
+  },
+  {
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+    plugins: {
+      jest: jestPlugin,
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'jest/no-disabled-tests': 'warn',
+      'jest/no-focused-tests': 'error',
+      'jest/no-identical-title': 'error',
+      'jest/prefer-to-have-length': 'warn',
+      'jest/valid-expect': 'error',
     },
   },
 ];
