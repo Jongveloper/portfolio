@@ -41,6 +41,10 @@ const config = [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'eol-last': ['error', 'always'],
+      '@typescript-eslint/no-unused-vars': ['error', { 
+        'varsIgnorePattern': '^(NodeJS|ProcessEnv)$',
+        'ignoreRestSiblings': true 
+      }],
       'import/order': [
         'error',
         {
@@ -116,7 +120,6 @@ const config = [
           maxBOF: 0,
         },
       ],
-      'no-unused-vars': [2, { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
     },
   },
 ];
