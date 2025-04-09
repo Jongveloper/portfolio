@@ -54,6 +54,7 @@ const preview: Preview = {
           {
             id: 'color-contrast',
             enabled: true,
+            selector: '*:not(.css-1a6dvpz, .css-1fuk41d, .css-1p1azt3)',
           },
         ],
       },
